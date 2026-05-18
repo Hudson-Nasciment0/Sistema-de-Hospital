@@ -17,7 +17,7 @@ Emergencia *Pilha_Emergencia;
 Consulta *Fila_Consulta;
 Exame *Fila_Exame_Circular;
 //
-
+//
 Emergencia* Criar_Pilha_Emergencia(){
     Emergencia *e = (Emergencia*) malloc(sizeof(Emergencia));
     e->total_pacientes = 0;
@@ -33,7 +33,7 @@ Exame* Criar_Fila_Exame(){
     e->index_inicio = 0;
     e->total_pacientes = 0;
 }
-
+//
 // indeces para controlar o número de pacientes em cada fila
 // exame como é circular precisamos de 2, tamanho total, e o indice atual
 //
@@ -126,7 +126,6 @@ void Cadastrar_Paciente(){
     //
     Paciente paciente = criar_paciente(nome_temp,idade_temp,gravidade_temp,tipo_temp);
     //
-
     // Verificamos o tipo de atendimento do paciente e o adicionamos à fila correspondente,
     // desde que haja espaço disponível na fila;
 
