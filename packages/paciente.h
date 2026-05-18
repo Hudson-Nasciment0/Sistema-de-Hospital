@@ -6,8 +6,6 @@ typedef struct Paciente
     int tipo_atendimento; // -- 1 para emergência, 2 para consulta , 3 para exame    
 } Paciente;
 
-
-
 // Função para criar um paciente
 // Parâmetros:
 // - nome: nome do paciente

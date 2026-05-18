@@ -1,0 +1,3 @@
+#define MAX_EMERGENCIA 10
+#define MAX_CONSULTA 10
+#define MAX_EXAME 8

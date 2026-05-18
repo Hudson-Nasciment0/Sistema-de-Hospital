@@ -3,25 +3,37 @@
 #include <string.h>
 #include <ctype.h>
 // bibliotecas locais
-#include "paciente.h"
-
-// aqui por algum motivo não funciona o ';'
-#define MAX_EMERGENCIA 10
-#define MAX_CONSULTA 10
-#define MAX_EXAME 8
+#include "packages\paciente.h"
+#include "packages\Utils.h"
+//
+#include "packages\Consulta.h"
+#include "packages\Exame.h"
+#include "packages\Emergencia.h"
 
 // Filas
 // deixamos o limite em 10 pacientes para emergência e consulta, e 8 para exame, mas isso pode ser ajustado conforme necessário
-Paciente Pilha_Emergencia[MAX_EMERGENCIA];
 //
-int count_emergencia = 0;
+Emergencia *Pilha_Emergencia;
+Consulta *Fila_Consulta;
+Exame *Fila_Exame_Circular;
 //
-Paciente fila_consulta[MAX_CONSULTA];
-int count_consulta = 0;
+
+Emergencia* Criar_Pilha_Emergencia(){
+    Emergencia *e = (Emergencia*) malloc(sizeof(Emergencia));
+    e->total_pacientes = 0;
+}
 //
-Paciente fila_exame_circular[MAX_EXAME];
-int count_exame = 0;
-int index_inicio_exame = 0;
+Consulta* Criar_Fila_Consulta(){
+    Consulta *c = (Consulta*) malloc(sizeof(Consulta));
+    c->total_pacientes = 0;
+}
+//
+Exame* Criar_Fila_Exame(){
+    Exame *e = (Exame*) malloc(sizeof(Exame));
+    e->index_inicio = 0;
+    e->total_pacientes = 0;
+}
+
 // indeces para controlar o número de pacientes em cada fila
 // exame como é circular precisamos de 2, tamanho total, e o indice atual
 //
@@ -42,37 +54,42 @@ void limpar_tela(){
 // Função para cadastrar no setor de Emergencia
 void Cadastrar_Emergencia(Paciente paciente){
     // por ser uma pilha só adicionamos no último index já que é LIFO;
-    if(count_emergencia == MAX_EMERGENCIA){
+    if(Pilha_Emergencia->total_pacientes == MAX_EMERGENCIA){
         // se está cheia retornamos
         printf("Pilha de Emergência Cheia. não é possível adicionar mais pacientes!!\n"); 
         return;
     }
     //
-    Pilha_Emergencia[count_emergencia] = paciente;
-    count_emergencia ++;
+    int index = Pilha_Emergencia->total_pacientes;
+    Pilha_Emergencia->Pacientes[index] = paciente;
+    Pilha_Emergencia->total_pacientes++;
 }
 // Nesse caso fila é FIFO (First In, First Out) -- O Primeiro a entrar é o primeiro a sair.
 void Cadastrar_Consulta(Paciente paciente){
-    if(count_consulta == MAX_CONSULTA){
+    if(Fila_Consulta->total_pacientes == MAX_CONSULTA){
         printf("Fila de consulta Cheia. não é possível adicionar mais pacientes!");
         // se está cheia simplesmente retornamos
         return;
     }
-    fila_consulta[count_consulta] = paciente;
-    count_consulta ++;
+    int index = Fila_Consulta->total_pacientes;
+    Fila_Consulta->Pacientes[index] = paciente;
+    Fila_Consulta->total_pacientes++;
 }
 
 // Funçao de cadastrar paciente no setor Exame
 void Cadastrar_Exame(Paciente paciente){
    
-    if(count_exame == MAX_EXAME){
+    if(Fila_Exame_Circular->total_pacientes == MAX_EXAME){
         printf("Fila de Exame Cheia. não é possível adicionar mais pacientes!");
         return;
     }
-
-    int posicao_insercao = (index_inicio_exame + count_exame) % MAX_EXAME; //
-    fila_exame_circular[posicao_insercao] = paciente;
-    count_exame ++; 
+    int total_exame = Fila_Exame_Circular->total_pacientes;
+    int index_inicio = Fila_Exame_Circular->index_inicio;
+    //
+    int posicao_insercao = (index_inicio + total_exame) % MAX_EXAME; //
+    //
+    Fila_Exame_Circular->Pacientes[posicao_insercao] = paciente;
+    Fila_Exame_Circular->total_pacientes++;
 
     //
     printf("Cadastrado Paciente %s na fila de exame na posição [%d]",paciente.nome,posicao_insercao+1);
@@ -137,7 +154,7 @@ void Atender_Pilha_Emergencia(){
     // Limpamos a tela
     limpar_tela();
     // iniciamos o atendimento do último da pilha (topo)
-    if(count_emergencia == 0){
+    if(Pilha_Emergencia->total_pacientes == 0){
         //
         printf("\nO Setor de Emergencia nao possui pacientes!\n\n");
         //
@@ -145,13 +162,13 @@ void Atender_Pilha_Emergencia(){
         //
         return;
     }
-    Paciente paciente = Pilha_Emergencia[count_emergencia-1]; // aqui usamos o contador com o -1 porque se tem 5 elementos o último é indice 4 ( i = c - 1 )
+    int index = Pilha_Emergencia->total_pacientes;
+    Paciente paciente = Pilha_Emergencia->Pacientes[index-1]; // aqui usamos o contador com o -1 porque se tem 5 elementos o último é indice 4 ( i = c - 1 )
     //
     printf("\nRealizando Atendimento do Paciente: %s, no setor de EMERGENCIA\n",paciente.nome);
     //
-    count_emergencia --; // aqui só reduzimos a contagem porque o próximo que entrar vai sobreescrever;
-    free(paciente.nome); // ah, aqui também damos free() para evitar vazamento de memória ^_^ ;
-    // aqui só pedimos para apertar para dar tempo de ler
+    Pilha_Emergencia->total_pacientes--; // aqui só reduzimos a contagem porque o próximo que entrar vai sobreescrever;
+    free(paciente.nome);
     segurar_leitor();
     //
 }
@@ -160,44 +177,45 @@ void Atender_Fila_Consulta(){
     // fila, FIFO
     // limpamos a tela
     limpar_tela();
-    if(count_consulta == 0){
+    if(Fila_Consulta->total_pacientes == 0){
         //
         printf("\nO Setor de Consulta nao possui pacientes!\n\n");
         //
         segurar_leitor();
         return;
     }
-    Paciente paciente = fila_consulta[0]; // sempre o primeiro é que vai ser atendido.
+    Paciente paciente = Fila_Consulta->Pacientes[0]; // sempre o primeiro é que vai ser atendido.
     //
     printf("\nRealizando Atendimento do Paciente: %s, no setor de CONSULTA\n",paciente.nome);
     // a gente anda com a fila;
-    for (int i = 0; i < count_consulta; i++)
+    for (int i = 0; i < Fila_Consulta->total_pacientes; i++)
     {
         if(i > 0){
-            fila_consulta[i-1] = fila_consulta[i]; // aqui passamos todo mundo pra esquerda (andamos com a fila)
+            Fila_Consulta->Pacientes[i-1] = Fila_Consulta->Pacientes[i]; // aqui passamos todo mundo pra esquerda (andamos com a fila)
         }
     }
     //
-    count_consulta --;
+    Fila_Consulta->total_pacientes--;
     free(paciente.nome);
     segurar_leitor();
 }
 //
 void Atender_Fila_Exame_Circular(){
     // fila, FIFO - circular
-    if(count_exame == 0){
+    if(Fila_Exame_Circular->total_pacientes == 0){
         printf("\nO Setor de Exames nao possui pacientes!\n\n");
         segurar_leitor();
         return;
     }
     //
-    Paciente paciente = fila_exame_circular[index_inicio_exame];
+    int index_inicio = Fila_Exame_Circular->index_inicio;
+    Paciente paciente = Fila_Exame_Circular->Pacientes[index_inicio];
     //
     printf("\nRealizando Atendimento do Paciente: %s, no setor de EXAME\n",paciente.nome);
     //
-    index_inicio_exame = (index_inicio_exame + 1) % MAX_EXAME;
+    Fila_Exame_Circular->index_inicio = (index_inicio + 1) % MAX_EXAME;
     //
-    count_exame--; // diminuimos o tamanho da fila já que a pessoa foi atendida
+    Fila_Exame_Circular->total_pacientes--; // diminuimos o tamanho da fila já que a pessoa foi atendida
     free(paciente.nome);
     segurar_leitor();
     //
@@ -222,12 +240,12 @@ void Mostrar_Pacientes(){
     //
     printf("\n---EMERGENCIA---\n");
     //
-    if(count_emergencia > 0){
+    if(Pilha_Emergencia->total_pacientes > 0){
         //
-        for (int i = 0; i < count_emergencia; i++)
+        for (int i = 0; i < Pilha_Emergencia->total_pacientes; i++)
         {
             // pegamos cada paciente para mostrar os dados dele;
-            Paciente p = Pilha_Emergencia[i];
+            Paciente p = Pilha_Emergencia->Pacientes[i];
             //
             printf("Paciente: %s, Idade: %d, Gravidade: %d, Tipo de Atendimento: EMERGENCIA (%d)\n",p.nome,p.idade,p.gravidade,p.tipo_atendimento);
         }
@@ -236,12 +254,12 @@ void Mostrar_Pacientes(){
     //
     printf("\n---CONSULTA---\n");
     //
-    if(count_consulta > 0){
+    if(Fila_Consulta->total_pacientes > 0){
         //
-        for (int i = 0; i < count_consulta; i++)
+        for (int i = 0; i < Fila_Consulta->total_pacientes; i++)
         {
             // pegamos cada paciente para mostrar os dados dele;
-            Paciente p = fila_consulta[i];
+            Paciente p = Fila_Consulta->Pacientes[i];
             //
             printf("Paciente: %s, Idade: %d, Gravidade: %d, Tipo de Atendimento: CONSULTA (%d)\n",p.nome,p.idade,p.gravidade,p.tipo_atendimento);
         }
@@ -250,12 +268,12 @@ void Mostrar_Pacientes(){
     //
     printf("\n---EXAME---\n");
     //
-    if(count_exame > 0){
+    if(Fila_Exame_Circular->total_pacientes > 0){
         //
-        for (int i = 0; i < count_exame; i++)
+        for (int i = 0; i < Fila_Exame_Circular->total_pacientes; i++)
         {
             // pegamos cada paciente para mostrar os dados dele;
-            Paciente p = fila_exame_circular[(index_inicio_exame + i) % MAX_EXAME];
+            Paciente p = Fila_Exame_Circular->Pacientes[i];
             //
             printf("Paciente: %s, Idade: %d, Gravidade: %d, Tipo de Atendimento: EXAME (%d)\n",p.nome,p.idade,p.gravidade,p.tipo_atendimento);
         }
@@ -285,46 +303,49 @@ void Transferir_Paciente(){
         segurar_leitor();
         return;
     }
-
+    //
     // Removemos o paciente da origem para passar ele para o setor correspondente
     // Aqui cuidamos do setor de Emergenica
     if(origem == 1){
-        if(count_emergencia == 0){
+        if(Pilha_Emergencia->total_pacientes == 0){
             printf("Emergencia vazia!\n");
             segurar_leitor();
             return;
         }
-
-        paciente = Pilha_Emergencia[count_emergencia - 1];
-        count_emergencia--;
+        int index = Pilha_Emergencia->total_pacientes - 1;
+        paciente = Pilha_Emergencia->Pacientes[index];
+        Pilha_Emergencia->total_pacientes--;
     }
     // Aqui cuidamos do setor de Consulta
     else if(origem == 2){
-        if(count_consulta == 0){
+        if(Fila_Consulta->total_pacientes == 0){
             printf("Consulta vazia!\n");
             segurar_leitor();
             return;
         }
 
-        paciente = fila_consulta[0];
+        paciente = Fila_Consulta->Pacientes[0];
 
-        for(int i = 1; i < count_consulta; i++){
-            fila_consulta[i - 1] = fila_consulta[i];
+        for(int i = 1; i < Fila_Consulta->total_pacientes; i++){
+            Fila_Consulta->Pacientes[i - 1] = Fila_Consulta->Pacientes[i];
         }
 
-        count_consulta--;
+        Fila_Consulta->total_pacientes--;
     }
     // Aqui cuidamos do setor de Exames
     else if(origem == 3){
-        if(count_exame == 0){
+        if(Fila_Exame_Circular->total_pacientes == 0){
             printf("Exame vazio!\n");
             segurar_leitor();
             return;
         }
-
-        paciente = fila_exame_circular[index_inicio_exame];
-        index_inicio_exame = (index_inicio_exame + 1) % MAX_EXAME;
-        count_exame--;
+        int index_inicio = Fila_Exame_Circular->index_inicio;
+        //
+        paciente = Fila_Exame_Circular->Pacientes[index_inicio];
+        //
+        Fila_Exame_Circular->index_inicio = (index_inicio + 1) % MAX_EXAME;
+        //
+        Fila_Exame_Circular->total_pacientes--;
     }
     // caso o setor de origem não exista:
     else{
@@ -336,37 +357,45 @@ void Transferir_Paciente(){
     // Aqui fazemos a adição no setor de destino
     // Respeitando o limite de pessoas no setor
     if(destino == 1){
-        if(count_emergencia == MAX_EMERGENCIA){
+        if(Pilha_Emergencia->total_pacientes == MAX_EMERGENCIA){
             printf("Emergencia cheia!\n");
             segurar_leitor();
             return;
         }
         // pegamos o paciente e adicionamos no setor correspondente
-        Pilha_Emergencia[count_emergencia] = paciente;
-        count_emergencia++;
+        int index = Pilha_Emergencia->total_pacientes;
+        Pilha_Emergencia->Pacientes[index] = paciente;
+        Pilha_Emergencia->total_pacientes++;
     }
 
     else if(destino == 2){
-        if(count_consulta == MAX_CONSULTA){
+        if(Fila_Consulta->total_pacientes == MAX_CONSULTA){
             printf("Consulta cheia!\n");
             segurar_leitor();
             return;
         }
         // o mesmo processo do descrito acima
-        fila_consulta[count_consulta] = paciente;
-        count_consulta++;
+        int index = Fila_Consulta->total_pacientes;
+        //
+        Fila_Consulta->Pacientes[index] = paciente;
+        //
+        Fila_Consulta->total_pacientes++;
     }
 
     else if(destino == 3){
-        if(count_exame == MAX_EXAME){
+        if(Fila_Exame_Circular->total_pacientes == MAX_EXAME){
             printf("Exame cheio!\n");
             segurar_leitor();
             return;
         }
         // aqui temos que usar o cálculo usado no cadastro para ter o indice correto para a inserção
-        int fim = (index_inicio_exame + count_exame) % MAX_EXAME;
-        fila_exame_circular[fim] = paciente;
-        count_exame++;
+        int inicio_exame = Fila_Exame_Circular->index_inicio;
+        int total_exame = Fila_Exame_Circular->total_pacientes;
+        //
+        int fim = (inicio_exame + total_exame) % MAX_EXAME;
+        Fila_Exame_Circular->Pacientes[fim] = paciente;
+        //
+        Fila_Exame_Circular->total_pacientes++;
     }
     // caso o destino inserido não exista:
     else{
@@ -381,14 +410,14 @@ void Transferir_Paciente(){
 
 // agora a função que gera um relatório do hospital
 void Gerar_Relatorios(){
-    int total = count_emergencia + count_consulta + count_exame;
+    int total = Pilha_Emergencia->total_pacientes + Fila_Consulta->total_pacientes + Fila_Exame_Circular->total_pacientes;
 
     limpar_tela();
 
     printf("\n===== RELATORIOS DO HOSPITAL =====\n");
-    printf("Pacientes na Emergencia: %d\n", count_emergencia);
-    printf("Pacientes na Consulta: %d\n", count_consulta);
-    printf("Pacientes no Exame: %d\n", count_exame);
+    printf("Pacientes na Emergencia: %d\n", Pilha_Emergencia->total_pacientes);
+    printf("Pacientes na Consulta: %d\n", Fila_Consulta->total_pacientes);
+    printf("Pacientes no Exame: %d\n", Fila_Exame_Circular->total_pacientes);
     printf("Total de Pacientes: %d\n", total);
 
     segurar_leitor();
@@ -398,6 +427,10 @@ void Gerar_Relatorios(){
 int main(int argc, char const *argv[])
 {
    int opcao;
+   // Antes de rodar, criamos as filas
+    Pilha_Emergencia = Criar_Pilha_Emergencia();
+    Fila_Consulta = Criar_Fila_Consulta();
+    Fila_Exame_Circular = Criar_Fila_Exame();
    //
    do{
         limpar_tela(); // limpamos a tela para seguir em frente (tira resto de texto desnecessário)
@@ -441,6 +474,9 @@ int main(int argc, char const *argv[])
             segurar_leitor(); // aqui seguramos para dar tempo de ler kkkkk
         }
    } while (opcao != 0); // continuamos no loop ate que o usuário escolha a opção de sair (0);
-
+   //
+   free(Pilha_Emergencia);
+   free(Fila_Consulta);
+   free(Fila_Exame_Circular);
     return 0;
 }
