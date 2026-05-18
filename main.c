@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 // bibliotecas locais
 #include "packages\paciente.h"
 #include "packages\Utils.h"
@@ -17,6 +18,14 @@ Emergencia *Pilha_Emergencia;
 Consulta *Fila_Consulta;
 Exame *Fila_Exame_Circular;
 //
+
+// Auxiliares
+void segurar_leitor(){
+    printf("\n\nPressione qualquer tecla para prosseguir...");
+    getchar();
+}
+
+
 //
 Emergencia* Criar_Pilha_Emergencia(){
     Emergencia *e = (Emergencia*) malloc(sizeof(Emergencia));
@@ -55,12 +64,7 @@ Exame* Criar_Fila_Exame(){
 // indeces para controlar o número de pacientes em cada fila
 // exame como é circular precisamos de 2, tamanho total, e o indice atual
 //
-// Auxiliares
-// essa função aqui só espera qualquer input para seguir em frente
-void segurar_leitor(){
-    printf("\n\nPressione qualquer tecla para prosseguir...");
-    getchar();
-}
+
 
 // função simples que manda o console se limpar (uiii);
 void limpar_tela(){
@@ -121,39 +125,45 @@ void Cadastrar_Paciente(){
     printf("\nBem vindo ao Cadastro de Paciente\n");
     // variaveis temporarias para o cadastro
     char nome_temp[100];
+    char cpf_temp[100];
     int idade_temp, gravidade_temp,tipo_temp;
     //
     printf("\nDigite o nome do Paciente: ");
     // usamos o fgets porque ele aceita espaços e por algum motivo o scanf não???
     fgets(nome_temp,sizeof(nome_temp),stdin); // isso aqui não entendo muito como funciona, descobri pesquisando mas não entendi ;-;
 
-    nome_temp[strcspn(nome_temp, "\n")] = 0; 
+    nome_temp[strcspn(nome_temp, "\n")] = 0;
+    //
+
+    printf("\nDigite o CPF do Paciente: ");
+    //
+    fgets(cpf_temp,sizeof(cpf_temp),stdin);
+
+    cpf_temp[strcspn(cpf_temp, "\n")] = 0; 
+    //
+
     //
     printf("\nDigite a idade do Paciente: ");
     scanf("%d",&idade_temp);
     //
+    
     printf("\nGravidade (1-5): ");
     scanf("%d",&gravidade_temp);
     //
     if(gravidade_temp < 4){
-        printf("\nTipo (1-Emergencia, 2-Consulta, 3-Exame): ");
+        printf("\nTipo (1-Emergencia, 2-Consulta, 3-Exame): Gravidade Selecionada [%d]",gravidade_temp);
         scanf("%d",&tipo_temp);
     }else{
         tipo_temp = 1;
     }
     //
-    Paciente paciente = criar_paciente(nome_temp,idade_temp,gravidade_temp,tipo_temp);
+    Paciente paciente = criar_paciente(nome_temp,idade_temp,gravidade_temp,tipo_temp,cpf_temp);
     //
     // Verificamos o tipo de atendimento do paciente e o adicionamos à fila correspondente,
     // desde que haja espaço disponível na fila;
 
     if(paciente.tipo_atendimento == 1){ // emergencia
         Cadastrar_Emergencia(paciente);
-    }
-    else if (paciente.gravidade >= 4){
-        Cadastrar_Emergencia(paciente);
-        //
-        printf("\nPaciente Cadastrado Na Emergência por Conta da Alta Gravidade!\n");
     }
     else if (paciente.tipo_atendimento == 2){ // consulta
         Cadastrar_Consulta(paciente);
@@ -257,14 +267,14 @@ void Mostrar_Pacientes(){
     //
     printf("\n---EMERGENCIA---\n");
     //
+    // Registro é a posição do paciente na fila.
     if(Pilha_Emergencia->total_pacientes > 0){
         //
         for (int i = 0; i < Pilha_Emergencia->total_pacientes; i++)
         {
             // pegamos cada paciente para mostrar os dados dele;
             Paciente p = Pilha_Emergencia->Pacientes[i];
-            //
-            printf("Paciente: %s, Idade: %d, Gravidade: %d, Tipo de Atendimento: EMERGENCIA (%d)\n",p.nome,p.idade,p.gravidade,p.tipo_atendimento);
+            printf("Paciente: %s, Fila: [%d], CPF: %s ,Idade: %d, Gravidade: %d, Tipo de Atendimento: EMERGENCIA (%d)\n",p.nome,i,p.CPF,p.idade,p.gravidade,p.tipo_atendimento);
         }
         //
     } else { printf("\nSetor de EMERGENCIA Vazio!\n"); }
@@ -278,7 +288,7 @@ void Mostrar_Pacientes(){
             // pegamos cada paciente para mostrar os dados dele;
             Paciente p = Fila_Consulta->Pacientes[i];
             //
-            printf("Paciente: %s, Idade: %d, Gravidade: %d, Tipo de Atendimento: CONSULTA (%d)\n",p.nome,p.idade,p.gravidade,p.tipo_atendimento);
+            printf("Paciente: %s, Fila: [%d], CPF: %s ,Idade: %d, Gravidade: %d, Tipo de Atendimento: CONSULTA (%d)\n",p.nome,i,p.CPF,p.idade,p.gravidade,p.tipo_atendimento);
         }
         //
     }else{ printf("\nSetor de CONSULTA Vazio!\n"); }
@@ -292,7 +302,7 @@ void Mostrar_Pacientes(){
             // pegamos cada paciente para mostrar os dados dele;
             Paciente p = Fila_Exame_Circular->Pacientes[i];
             //
-            printf("Paciente: %s, Idade: %d, Gravidade: %d, Tipo de Atendimento: EXAME (%d)\n",p.nome,p.idade,p.gravidade,p.tipo_atendimento);
+            printf("Paciente: %s, Fila: [%d], CPF: %s ,Idade: %d, Gravidade: %d, Tipo de Atendimento: EXAME (%d)\n",p.nome,i,p.CPF,p.idade,p.gravidade,p.tipo_atendimento);
         }
         //
     }else{ printf("\nSetor de EXAME Vazio!\n"); }
@@ -440,9 +450,27 @@ void Gerar_Relatorios(){
     segurar_leitor();
 }
 
+void CriarArquivoTempo(double time_used){
+    FILE *f_ptr;
+    f_ptr = fopen("tempo_execucao.txt","w");
+
+    if(f_ptr == NULL){
+        printf("\nNão foi possível criar o arquivo especificado\n");
+        return;
+    }
+    //
+    fprintf(f_ptr,"\nTempo de Execução: %f\n",time_used);
+    fclose(f_ptr);
+}
 
 int main(int argc, char const *argv[])
 {
+    // medimos o tempo de execução do programa
+    clock_t comeco, final;
+    double tempo_execucao;
+    //
+    comeco = clock();
+    //
    int opcao;
    // Antes de rodar, criamos as filas
     Pilha_Emergencia = Criar_Pilha_Emergencia();
@@ -457,6 +485,7 @@ int main(int argc, char const *argv[])
         printf("3. Mostrar Pacientes em Cada Setor\n");
         printf("4. Transferir Paciente de Setor\n");
         printf("5. Relatorios\n");
+        printf("6. Realizar Teste de Stress");
         printf("\n0. Sair\n");
         printf("\nEscolha uma opcao: ");
         scanf("%d", &opcao);
@@ -475,12 +504,16 @@ int main(int argc, char const *argv[])
         case 3:
             Mostrar_Pacientes();
             break;
-            case 4:
-        Transferir_Paciente();
-        break;
+        case 4:
+            Transferir_Paciente();
+            break;
 
         case 5:
-        Gerar_Relatorios();
+            Gerar_Relatorios();
+            break;
+            
+        case 6:
+            //RealizarTesteStresse();
             break;
         case 0:
             printf("\nSaindo do sistema...\n");
@@ -489,11 +522,22 @@ int main(int argc, char const *argv[])
             limpar_tela();
             printf("\nOpcao Invalida Tente Novamente!\n");
             segurar_leitor(); // aqui seguramos para dar tempo de ler kkkkk
+            break;
         }
    } while (opcao != 0); // continuamos no loop ate que o usuário escolha a opção de sair (0);
    //
    free(Pilha_Emergencia);
    free(Fila_Consulta);
    free(Fila_Exame_Circular);
+   // pegamos o tempo
+
+   final = clock();
+
+   tempo_execucao = ((double)(final-comeco)) / CLOCKS_PER_SEC;
+
+   //
+   CriarArquivoTempo(tempo_execucao);
+   //
+
     return 0;
 }

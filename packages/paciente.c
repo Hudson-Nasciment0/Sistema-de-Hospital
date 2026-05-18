@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-Paciente criar_paciente(const char* nome, int idade, int gravidade, int tipo_atendimento) {
+Paciente criar_paciente(const char* nome, int idade, int gravidade, int tipo_atendimento,const char* cpf) {
     Paciente paciente;
     // Aloca memória para o nome do paciente;
     paciente.nome = malloc(strlen(nome) + 1);
@@ -13,9 +13,13 @@ Paciente criar_paciente(const char* nome, int idade, int gravidade, int tipo_ate
         exit(EXIT_FAILURE); // -- Exit_Failure é uma macro definida em stdlib.h que indica que o programa terminou com um erro (ou seja, retornou 1);
     }
     //
+    paciente.CPF = malloc(strlen(cpf)+1);
+    //
     // agora é so preencher os dados do paciente e retornar a estrutura preenchida;
     //
     strcpy(paciente.nome, nome); // -- Copia a string do nome para a memória alocada;
+    strcpy(paciente.CPF,cpf); //
+    //
     paciente.idade = idade;
     paciente.gravidade = gravidade;
     paciente.tipo_atendimento = tipo_atendimento;

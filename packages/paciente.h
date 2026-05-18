@@ -4,6 +4,7 @@ typedef struct Paciente
     int idade; // auto explicativo 
     int gravidade; // -- 1 a 5, sendo 1 o mais grave
     int tipo_atendimento; // -- 1 para emergência, 2 para consulta , 3 para exame    
+    char* CPF;
 } Paciente;
 
 // Função para criar um paciente
@@ -14,4 +15,4 @@ typedef struct Paciente
 // - tipo_atendimento: tipo de atendimento (1 para emergência, 2 para consulta, 3 para exame)
 // Retorna:
 // - Uma estrutura Paciente preenchida com os dados fornecidos
-Paciente criar_paciente(const char* nome, int idade, int gravidade, int tipo_atendimento);
+Paciente criar_paciente(const char* nome, int idade, int gravidade, int tipo_atendimento,const char* cpf);
