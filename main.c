@@ -15,18 +15,18 @@
 // deixamos o limite em 10 pacientes para emergência e consulta, e 8 para exame, mas isso pode ser ajustado conforme necessário
 Paciente Pilha_Emergencia[MAX_EMERGENCIA];
 //
+int count_emergencia = 0;
+//
 Paciente fila_consulta[MAX_CONSULTA];
+int count_consulta = 0;
 //
 Paciente fila_exame_circular[MAX_EXAME];
-// indeces para controlar o número de pacientes em cada fila
-int count_emergencia = 0;
-int count_consulta = 0;
-// exame como é circular precisamos de 2, tamanho total, e o indice atual
 int count_exame = 0;
 int index_inicio_exame = 0;
+// indeces para controlar o número de pacientes em cada fila
+// exame como é circular precisamos de 2, tamanho total, e o indice atual
 //
 // Auxiliares
-
 // essa função aqui só espera qualquer input para seguir em frente
 void segurar_leitor(){
     printf("\n\nPressione qualquer tecla para prosseguir...");
@@ -101,8 +101,12 @@ void Cadastrar_Paciente(){
     printf("\nGravidade (1-5): ");
     scanf("%d",&gravidade_temp);
     //
-    printf("\nTipo (1-Emergencia, 2-Consulta, 3-Exame): ");
-    scanf("%d",&tipo_temp);
+    if(gravidade_temp < 4){
+        printf("\nTipo (1-Emergencia, 2-Consulta, 3-Exame): ");
+        scanf("%d",&tipo_temp);
+    }else{
+        tipo_temp = 1;
+    }
     //
     Paciente paciente = criar_paciente(nome_temp,idade_temp,gravidade_temp,tipo_temp);
     //
@@ -113,12 +117,18 @@ void Cadastrar_Paciente(){
     if(paciente.tipo_atendimento == 1){ // emergencia
         Cadastrar_Emergencia(paciente);
     }
+    else if (paciente.gravidade >= 4){
+        Cadastrar_Emergencia(paciente);
+        //
+        printf("\nPaciente Cadastrado Na Emergência por Conta da Alta Gravidade!\n");
+    }
     else if (paciente.tipo_atendimento == 2){ // consulta
         Cadastrar_Consulta(paciente);
     }
     else if (paciente.tipo_atendimento == 3){ // exame
         Cadastrar_Exame(paciente);
     }
+    segurar_leitor();
 }
 
 
