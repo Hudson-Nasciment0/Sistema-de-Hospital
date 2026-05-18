@@ -20,18 +20,36 @@ Exame *Fila_Exame_Circular;
 //
 Emergencia* Criar_Pilha_Emergencia(){
     Emergencia *e = (Emergencia*) malloc(sizeof(Emergencia));
+    if(e == NULL){
+        printf("\nNão foi possível alocar memória para a Pilha Emergencia\n");
+        segurar_leitor();
+        exit(EXIT_FAILURE);
+    }
     e->total_pacientes = 0;
+    return e;
 }
 //
 Consulta* Criar_Fila_Consulta(){
     Consulta *c = (Consulta*) malloc(sizeof(Consulta));
+    if(c == NULL){
+        printf("\nNão foi possível alocar memória para a Fila Consulta\n");
+        segurar_leitor();
+        exit(EXIT_FAILURE);
+    }
     c->total_pacientes = 0;
+    return c;
 }
 //
 Exame* Criar_Fila_Exame(){
     Exame *e = (Exame*) malloc(sizeof(Exame));
+    if(e == NULL){
+        printf("\nNão foi possível alocar memória para a Fila Exame\n");
+        segurar_leitor();
+        exit(EXIT_FAILURE);
+    }
     e->index_inicio = 0;
     e->total_pacientes = 0;
+    return e;
 }
 //
 // indeces para controlar o número de pacientes em cada fila
