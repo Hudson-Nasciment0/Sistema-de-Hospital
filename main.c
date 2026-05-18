@@ -10,7 +10,7 @@
 #define MAX_CONSULTA 10
 #define MAX_EXAME 8
 
-
+// ALOOOOOOOOOOOOOOOOOOOOOOO
 // Filas
 // deixamos o limite em 10 pacientes para emergência e consulta, e 8 para exame, mas isso pode ser ajustado conforme necessário
 Paciente Pilha_Emergencia[MAX_EMERGENCIA];
