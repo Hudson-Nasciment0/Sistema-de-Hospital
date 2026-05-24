@@ -10,7 +10,7 @@ O projeto foi criado com fins acadêmicos, com o objetivo de praticar manipulaç
 
 O sistema permite realizar o gerenciamento básico de um hospital através de um menu interativo no terminal.
 
-Nele é possível cadastrar pacientes, médicos e consultas, além de buscar, listar e excluir registros.
+Nele é possível cadastrar pacientes, consultas, além de buscar e listar e registros.
 
 O foco principal do projeto é demonstrar o uso de:
 
@@ -29,13 +29,6 @@ O foco principal do projeto é demonstrar o uso de:
 - Cadastro de pacientes
 - Listagem de pacientes
 - Busca por CPF
-- Exclusão de pacientes
-
-### Médicos
-- Cadastro de médicos
-- Listagem de médicos
-- Busca por CRM
-- Exclusão de médicos
 
 ### Consultas
 - Registro de consultas
