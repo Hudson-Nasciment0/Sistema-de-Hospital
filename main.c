@@ -296,6 +296,8 @@ void Atender_Fila_Exame_Circular()
     segurar_leitor();
 }
 
+
+
 void RealizarTesteEstresse()
 {
     limpar_tela();
