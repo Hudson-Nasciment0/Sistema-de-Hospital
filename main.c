@@ -87,6 +87,10 @@ void Cadastrar_Emergencia(Paciente paciente)
     Pilha_Emergencia->Pacientes[index] = paciente;
 
     Pilha_Emergencia->total_pacientes++;
+    //
+    printf("Cadastrado Paciente %s na Pilha de Emergencia na posicao [%d]\n",
+           paciente.nome,
+           index + 1);
 }
 
 void Cadastrar_Consulta(Paciente paciente)
@@ -102,6 +106,10 @@ void Cadastrar_Consulta(Paciente paciente)
     Fila_Consulta->Pacientes[index] = paciente;
 
     Fila_Consulta->total_pacientes++;
+    //
+    printf("Cadastrado Paciente %s na fila de Consulta na posicao [%d]\n",
+           paciente.nome,
+           index + 1);
 }
 
 void Cadastrar_Exame(Paciente paciente)
@@ -122,7 +130,7 @@ void Cadastrar_Exame(Paciente paciente)
 
     Fila_Exame_Circular->total_pacientes++;
 
-    printf("Cadastrado Paciente %s na fila de exame na posicao [%d]",
+    printf("Cadastrado Paciente %s na fila de exame na posicao [%d]\n",
            paciente.nome,
            posicao_insercao + 1);
 }
@@ -291,9 +299,9 @@ void RealizarTesteEstresse()
 
     clock_t inicio = clock();
 
-    int total_testes = 100000;
+    int testes_realizados = 0;
 
-    for (int i = 0; i < total_testes; i++)
+    for (int i = 0; i < MAX_STRESS_TEST; i++)
     {
         char nome[50];
         char cpf[30];
@@ -336,6 +344,7 @@ void RealizarTesteEstresse()
                 Cadastrar_Exame(paciente);
             }
         }
+        testes_realizados++;
     }
 
     clock_t fim = clock();
@@ -344,7 +353,7 @@ void RealizarTesteEstresse()
 
     printf("\nTeste finalizado.\n");
 
-    printf("Foram feitas %d tentativas de cadastro.\n", total_testes);
+    printf("Foram feitas %d tentativas de cadastro.\n", testes_realizados);
 
     printf("\nPacientes na Emergencia: %d",
            Pilha_Emergencia->total_pacientes);
