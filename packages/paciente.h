@@ -1,9 +1,9 @@
 typedef struct Paciente
 {
-    char* nome; // auto explicativo
-    int idade; // auto explicativo 
-    int gravidade; // -- 1 a 5, sendo 1 o mais grave
-    int tipo_atendimento; // -- 1 para emergência, 2 para consulta , 3 para exame    
+    char* nome; 
+    int idade; 
+    int gravidade;
+    int tipo_atendimento;   
     char* CPF;
 } Paciente;
 
