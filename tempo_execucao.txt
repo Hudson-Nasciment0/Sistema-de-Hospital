@@ -1,2 +1,2 @@
 
-Tempo de Execução: 201.636000
+Tempo de Execucao: 184.181000

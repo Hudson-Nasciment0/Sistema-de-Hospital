@@ -74,6 +74,15 @@ void limpar_tela()
     system("cls");
 }
 
+//
+// Limpa o buffer de entrada para não causar um "Enter" acidental
+void limparBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+
+
 void Cadastrar_Emergencia(Paciente paciente)
 {
     if (Pilha_Emergencia->total_pacientes == MAX_EMERGENCIA)
@@ -138,36 +147,34 @@ void Cadastrar_Exame(Paciente paciente)
 void Cadastrar_Paciente()
 {
     limpar_tela();
-
+    limparBuffer();
+    
     printf("\nBem vindo ao Cadastro de Paciente\n");
-
     char nome_temp[100];
     char cpf_temp[100];
 
     int idade_temp;
     int gravidade_temp;
     int tipo_temp;
+    //
 
     printf("\nDigite o nome do Paciente: ");
-
+    //
     fgets(nome_temp, sizeof(nome_temp), stdin);
-
     nome_temp[strcspn(nome_temp, "\n")] = 0;
-
+    //
+    //
     printf("\nDigite o CPF do Paciente: ");
-
+    //
     fgets(cpf_temp, sizeof(cpf_temp), stdin);
-
     cpf_temp[strcspn(cpf_temp, "\n")] = 0;
-
+    //
     printf("\nDigite a idade do Paciente: ");
-
     scanf("%d", &idade_temp);
-
+    //
     printf("\nGravidade (1-5): ");
-
     scanf("%d", &gravidade_temp);
-
+    //
     if (gravidade_temp < 4)
     {
         printf("\nTipo (1-Emergencia, 2-Consulta, 3-Exame): ");
@@ -178,16 +185,14 @@ void Cadastrar_Paciente()
     {
         tipo_temp = 1;
     }
-
-    getchar();
-
+    //
     Paciente paciente = criar_paciente(
         nome_temp,
         idade_temp,
         gravidade_temp,
         tipo_temp,
         cpf_temp);
-
+    //
     if (paciente.tipo_atendimento == 1)
     {
         Cadastrar_Emergencia(paciente);
