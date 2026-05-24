@@ -26,7 +26,7 @@ Emergencia *Criar_Pilha_Emergencia()
 
     if (e == NULL)
     {
-        printf("\nNão foi possível alocar memória para a Pilha Emergencia\n");
+        printf("\nNao foi possivel alocar memoria para a Pilha Emergencia\n");
         segurar_leitor();
         exit(EXIT_FAILURE);
     }
@@ -42,7 +42,7 @@ Consulta *Criar_Fila_Consulta()
 
     if (c == NULL)
     {
-        printf("\nNão foi possível alocar memória para a Fila Consulta\n");
+        printf("\nNao foi possivel alocar memoria para a Fila Consulta\n");
         segurar_leitor();
         exit(EXIT_FAILURE);
     }
@@ -58,7 +58,7 @@ Exame *Criar_Fila_Exame()
 
     if (e == NULL)
     {
-        printf("\nNão foi possível alocar memória para a Fila Exame\n");
+        printf("\nNao foi possivel alocar memoria para a Fila Exame\n");
         segurar_leitor();
         exit(EXIT_FAILURE);
     }
@@ -78,7 +78,7 @@ void Cadastrar_Emergencia(Paciente paciente)
 {
     if (Pilha_Emergencia->total_pacientes == MAX_EMERGENCIA)
     {
-        printf("Pilha de Emergência Cheia. não é possível adicionar mais pacientes!!\n");
+        printf("Pilha de Emergencia Cheia. nao e possivel adicionar mais pacientes!\n");
         return;
     }
 
@@ -93,7 +93,7 @@ void Cadastrar_Consulta(Paciente paciente)
 {
     if (Fila_Consulta->total_pacientes == MAX_CONSULTA)
     {
-        printf("Fila de consulta Cheia. não é possível adicionar mais pacientes!");
+        printf("Fila de consulta Cheia. nao e possivel adicionar mais pacientes!");
         return;
     }
 
@@ -108,7 +108,7 @@ void Cadastrar_Exame(Paciente paciente)
 {
     if (Fila_Exame_Circular->total_pacientes == MAX_EXAME)
     {
-        printf("Fila de Exame Cheia. não é possível adicionar mais pacientes!");
+        printf("Fila de Exame Cheia. nao e possivel adicionar mais pacientes!");
         return;
     }
 
@@ -122,7 +122,7 @@ void Cadastrar_Exame(Paciente paciente)
 
     Fila_Exame_Circular->total_pacientes++;
 
-    printf("Cadastrado Paciente %s na fila de exame na posição [%d]",
+    printf("Cadastrado Paciente %s na fila de exame na posicao [%d]",
            paciente.nome,
            posicao_insercao + 1);
 }
@@ -291,7 +291,7 @@ void RealizarTesteEstresse()
 
     clock_t inicio = clock();
 
-    int total_testes = 1000;
+    int total_testes = 100000;
 
     for (int i = 0; i < total_testes; i++)
     {
@@ -342,7 +342,7 @@ void RealizarTesteEstresse()
 
     double tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
 
-    printf("\nTeste finalizado!\n");
+    printf("\nTeste finalizado.\n");
 
     printf("Foram feitas %d tentativas de cadastro.\n", total_testes);
 

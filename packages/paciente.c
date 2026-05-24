@@ -8,13 +8,13 @@ Paciente criar_paciente(const char *nome, int idade, int gravidade, int tipo_ate
     paciente.nome = malloc(strlen(nome) + 1);
     if (paciente.nome == NULL)
     {
-        printf("Erro ao alocar memória para o nome do paciente\n");
+        printf("Erro ao alocar memoria para o nome do paciente\n");
         exit(EXIT_FAILURE);
     }
     paciente.CPF = malloc(strlen(cpf) + 1);
     if (paciente.CPF == NULL)
     {
-        printf("Erro ao alocar memória para o CPF do paciente\n");
+        printf("Erro ao alocar memoria para o CPF do paciente\n");
         exit(EXIT_FAILURE);
     }
     strcpy(paciente.nome, nome);
