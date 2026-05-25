@@ -229,8 +229,29 @@ Sistema-Hospital/
 ├── README.md
 
 </pre>
+<hr>
+<h2>📋 Relatório do Projeto</h2>
 
+<p align="justify">
+Durante o desenvolvimento do projeto foram utilizadas tecnologias como 
+ponteiros, estruturas de dados, modularização de código, cppcheck, 
+compilação e organização de ambiente, entre outros recursos fundamentais 
+da linguagem C. Essas ferramentas foram importantes para a construção e 
+funcionamento do sistema hospitalar, permitindo uma melhor organização do 
+código e gerenciamento dos dados do projeto.
+</p>
 
+<hr>
+<h2>🚫 Crítica do Projeto</h2>
+
+<p align="justify">
+A principal dificuldade encontrada pelo grupo foi a adaptação à linguagem C, 
+que possui uma complexidade maior quando comparada ao Python, linguagem 
+que a maioria dos integrantes já tinha mais familiaridade. O uso de ponteiros 
+e o gerenciamento de memória também exigiram maior atenção durante o 
+desenvolvimento. Apesar das dificuldades, o projeto contribuiu 
+significativamente para o aprendizado lógico e técnico de toda a equipe.
+</p>
 <hr>
 
 <h2>👥 Integrantes do Grupo</h2>
@@ -272,7 +293,15 @@ Desenvolvido por:
 </tr>
 
 </table>
+<hr>
 
+<h2>🔗 Repositório do Projeto</h2>
+
+<p align="center">
+<a href="https://github.com/Hudson-Nasciment0/Sistema-de-Hospital">
+Clique aqui para acessar o Sistema de Hospital 🏥
+</a>
+</p>
 <br>
 
 
