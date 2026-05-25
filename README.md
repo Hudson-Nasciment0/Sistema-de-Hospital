@@ -1,61 +1,282 @@
-<!-- Cabeçalho Principal -->
-<div align="center">
-  <h1>🏥 Sistema de Hospital</h1>
-  <p><i>Trabalho acadêmico desenvolvido para gerenciamento hospitalar em C.</i></p>
-  <br>
-  
-  <!-- Badges de Tecnologia -->
-  <h2>Linguagem Utilizada:</h2>
-  
-  ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
-  <img src="https://img.shields.io/badge/Tools-GCC-00599C?style=for-the-badge" alt="GCC Badge">
-  
-</div>
+<h1 align="center">
+🏥 Sistema de Gerenciamento Hospitalar
+</h1>
 
-<!-- Seção: Como Compilar -->
-<h2>🛠️ Como Compilar</h2>
-<p>No terminal, dentro da pasta do projeto, execute o comando abaixo:</p>
+<p align="center">
+Sistema desenvolvido em C utilizando estruturas de dados para simular o gerenciamento de pacientes em um hospital.
+</p>
 
-<div style="border: 1px solid #30363d; padding: 15px; margin-bottom: 20px;">
-  <p style="color: #58a6ff; font-family: 'Courier New', Courier, font-size: 14px;">
-    gcc main.c paciente.c -o hospital
-  </p>
-</div>
+<hr>
 
-<!-- Seção: Como Executar -->
-<h2>🚀 Como Executar</h2>
-<p>Basta clicar duas vezes no arquivo executável gerado:</p>
+<h2>📌 Sobre o Projeto</h2>
 
-<div style="background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 15px; margin-bottom: 20px; display: inline-block;">
-  <span style="color: #7ee787; font-weight: bold; font-family: sans-serif;">👉 hospital.exe</span>
-</div>
+<p>
+O sistema realiza o gerenciamento de pacientes através de diferentes setores hospitalares utilizando estruturas de dados clássicas:
+</p>
 
+<ul>
+<li><b>Emergência → Pilha (LIFO)</b></li>
+<li><b>Consulta → Fila Simples (FIFO)</b></li>
+<li><b>Exame → Fila Circular</b></li>
+</ul>
 
+<p>
+Além do gerenciamento, o sistema permite cadastro, atendimento, transferência de pacientes e geração de relatórios.
+</p>
 
-<!-- Seção: Integrantes -->
-<h2>👥 Integrantes do Grupo</h2>
-<p>Desenvolvido por:</p>
+<hr>
 
-<table style="border-collapse: collapse; width: 100%; max-width: 500px; font-family: sans-serif;">
-  <tr style="background-color: #161b22; border-bottom: 20px solid transparent;">
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px;">👤 Beatriz Barboza Marques Lima da Silva</td>
-  </tr>
-  <tr>
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px;">👤 Davy Queiroz da Silva</td>
-  </tr>
-  <tr>
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px; font-weight: bold; color: #58a6ff; background-color: #1f2937;">👤 Hudson Nascimento Pereira Vieira</td>
-  </tr>
-  <tr>
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px;">👤 Igor dos Santos Moura</td>
-  </tr>
-  <tr>
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px;">👤 Matheus Lima Rocha</td>
-  </tr>
-  <tr>
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px;">👤 Rafael dos Santos Paulo</td>
-  </tr>
-  <tr>
-    <td style="padding: 8px 12px; border: 1px solid #30363d; border-radius: 4px;">👤 Rodrigo Gomes da Conceição</td>
-  </tr>
+<h2>⚙ Funcionalidades</h2>
+
+✔ Cadastro de pacientes<br>
+✔ Atendimento automático por setor<br>
+✔ Exibição dos pacientes cadastrados<br>
+✔ Transferência entre setores<br>
+✔ Relatórios do hospital<br>
+✔ Controle de filas<br>
+✔ Gerenciamento dinâmico de memória<br>
+
+<hr>
+
+<h2>🧠 Estruturas Utilizadas</h2>
+
+<table>
+
+<tr>
+<th>Setor</th>
+<th>Estrutura</th>
+<th>Funcionamento</th>
+</tr>
+
+<tr>
+<td>Emergência</td>
+<td>Pilha</td>
+<td>LIFO (Último a entrar, primeiro a sair)</td>
+</tr>
+
+<tr>
+<td>Consulta</td>
+<td>Fila</td>
+<td>FIFO (Primeiro a entrar, primeiro a sair)</td>
+</tr>
+
+<tr>
+<td>Exame</td>
+<td>Fila Circular</td>
+<td>Reutilização eficiente do vetor</td>
+</tr>
+
 </table>
+
+<hr>
+
+<h2>🚀 Novas Implementações V2</h2>
+
+<ul>
+
+<li>
+Foi realizada a separação das estruturas de <b>Fila</b> e <b>Pilha</b>.
+</li>
+
+<li>
+As estruturas foram organizadas em arquivos Header separados <b>(.h)</b>.
+</li>
+
+<li>
+Foram criados ao total <b>5 novos arquivos Header</b> para modularização das estruturas.
+</li>
+
+<li>
+As constantes do sistema foram movidas para um arquivo <b>Utils.h</b> para facilitar manutenção e acesso.
+</li>
+
+<li>
+Foi utilizado o <b>Cppcheck</b> para análise estática e verificação de possíveis falhas.
+</li>
+
+</ul>
+
+<hr>
+
+<h2>❌ Bugs Encontrados</h2>
+
+<p>
+Durante a análise realizada pelo Cppcheck foram encontrados:
+</p>
+
+<ul>
+
+<li>Possíveis <b>Memory Leaks</b></li>
+
+<li>Problemas de sintaxe e pontos de melhoria</li>
+
+</ul>
+
+<p>
+Algumas correções foram realizadas visando maior estabilidade do sistema.
+</p>
+
+<hr>
+
+<h2>⏱ Análise de Tempo</h2>
+
+<p>
+Foi realizada uma análise de tempo de execução da aplicação.
+</p>
+
+<h3>Funcionamento:</h3>
+
+<ol>
+
+<li>
+Ao iniciar a aplicação é executado o comando <b>clock()</b>, capturando o ciclo atual da CPU.
+</li>
+
+<li>
+Ao finalizar a aplicação o comando é executado novamente.
+</li>
+
+<li>
+É calculada a diferença entre o ciclo inicial e o ciclo final.
+</li>
+
+<li>
+O valor é convertido para segundos.
+</li>
+
+<li>
+Os resultados são gravados automaticamente em arquivo.
+</li>
+
+</ol>
+
+<p>
+
+Fórmula utilizada:
+
+</p>
+
+<pre>
+Tempo Total = (clock_final - clock_inicial) / CLOCKS_PER_SEC
+</pre>
+
+<hr>
+
+<h2>🔥 Análise de Estresse</h2>
+
+<p>
+Foi realizada uma análise de estresse do sistema com objetivo de identificar limitações e possíveis falhas sob carga.
+</p>
+
+<h3>Conclusões:</h3>
+
+<ul>
+
+<li>
+O sistema apresentou funcionamento estável durante os testes.
+</li>
+
+<li>
+Não foram observadas falhas críticas relacionadas às estruturas implementadas.
+</li>
+
+<li>
+Possíveis problemas podem ocorrer em cenários extremos:
+</li>
+
+<ul>
+<li>Baixa disponibilidade de memória RAM</li>
+<li>Uso excessivo de processamento</li>
+</ul>
+
+<li>
+A estabilidade está diretamente ligada aos recursos disponíveis na máquina.
+</li>
+
+</ul>
+
+<hr>
+
+<h2>📂 Estrutura do Projeto</h2>
+
+<pre>
+
+Sistema-Hospital/
+
+├── main.c
+├── paciente.c
+├── paciente.h
+├── fila.h
+├── pilha.h
+├── utils.h
+├── relatorios.h
+├── README.md
+
+</pre>
+
+<hr>
+
+<h2>🛠 Tecnologias Utilizadas</h2>
+
+<ul>
+
+<li>Linguagem C</li>
+
+<li>Alocação dinâmica (malloc/free)</li>
+
+<li>Cppcheck</li>
+
+<li>Estruturas de Dados</li>
+
+</ul>
+
+<hr>
+
+<hr>
+
+<h2>👥 Integrantes do Grupo</h2>
+
+<p>
+Desenvolvido por: 
+</p>
+
+<table width="100%">
+
+<tr>
+<td>👤 Beatriz Barboza Marques Lima da Silva</td>
+</tr>
+
+<tr>
+<td>👤 Davy Queiroz da Silva</td>
+</tr>
+
+<tr>
+<td>
+<b>👤 Hudson Nascimento Pereira Vieira ⭐</b>
+</td>
+</tr>
+
+<tr>
+<td>👤 Igor dos Santos Moura</td>
+</tr>
+
+<tr>
+<td>👤 Matheus Lima Rocha</td>
+</tr>
+
+<tr>
+<td>👤 Rafael dos Santos Paulo</td>
+</tr>
+
+<tr>
+<td>👤 Rodrigo Gomes da Conceição</td>
+</tr>
+
+</table>
+
+<br>
+
+<p align="center">
+💻 <i>Desenvolvido para fins acadêmicos — Engenharia de Software</i>
+</p>
+
