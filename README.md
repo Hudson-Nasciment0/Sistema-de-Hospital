@@ -298,7 +298,7 @@ Desenvolvido por:
 <h2>🔗 Repositório do Projeto</h2>
 
 <p align="center">
-<a href="https://github.com/Hudson-Nasciment0/Sistema-de-Hospital">
+<a href="[https://github.com/Hudson-Nasciment0/Sistema-de-Hospital](https://github.com/Hudson-Nasciment0/Sistema-de-Hospital/tree/Ponteiro)">
 Clique aqui para acessar o Sistema de Hospital 🏥
 </a>
 </p>
