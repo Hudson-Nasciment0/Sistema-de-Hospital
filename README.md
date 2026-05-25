@@ -157,7 +157,7 @@ Fórmula utilizada:
 </p>
 
 <pre>
-Tempo Total = (clock_final - clock_inicial) / CLOCKS_PER_SEC
+Tempo Total = (clock_final - clock_inicial) / 1000
 </pre>
 
 <hr>
