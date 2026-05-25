@@ -40,13 +40,13 @@ Além do gerenciamento, o sistema permite cadastro, atendimento, transferência 
 
 <h2> Funcionalidades</h2>
 
- Cadastro de pacientes<br>
- Atendimento automático por setor<br>
- Exibição dos pacientes cadastrados<br>
- Transferência entre setores<br>
- Relatórios do hospital<br>
- Controle de filas<br>
- Gerenciamento dinâmico de memória<br>
+ Cadastro de pacientes;<br>
+ Atendimento automático por setor;<br>
+ Exibição dos pacientes cadastrados;<br>
+ Transferência entre setores;<br>
+ Relatórios do hospital;<br>
+ Controle de filas;<br>
+ Gerenciamento dinâmico de memória;<br>
 
 <hr>
 
