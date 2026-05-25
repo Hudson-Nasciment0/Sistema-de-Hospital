@@ -1,5 +1,5 @@
 <h1 align="center">
-🏥 Sistema de Gerenciamento Hospitalar
+ Sistema de Gerenciamento Hospitalar
 </h1>
 
 <p align="center">
@@ -8,7 +8,7 @@ Sistema desenvolvido em C utilizando estruturas de dados para simular o gerencia
 
 <hr>
 
-<h2>📌 Sobre o Projeto</h2>
+<h2> Sobre o Projeto</h2>
 
 <p>
 O sistema realiza o gerenciamento de pacientes através de diferentes setores hospitalares utilizando estruturas de dados clássicas:
@@ -38,19 +38,19 @@ Além do gerenciamento, o sistema permite cadastro, atendimento, transferência 
 <p>Basta clicar duas vezes no executável "hospital.exe"</p>
 <hr>
 
-<h2>⚙ Funcionalidades</h2>
+<h2> Funcionalidades</h2>
 
-✔ Cadastro de pacientes<br>
-✔ Atendimento automático por setor<br>
-✔ Exibição dos pacientes cadastrados<br>
-✔ Transferência entre setores<br>
-✔ Relatórios do hospital<br>
-✔ Controle de filas<br>
-✔ Gerenciamento dinâmico de memória<br>
+ Cadastro de pacientes<br>
+ Atendimento automático por setor<br>
+ Exibição dos pacientes cadastrados<br>
+ Transferência entre setores<br>
+ Relatórios do hospital<br>
+ Controle de filas<br>
+ Gerenciamento dinâmico de memória<br>
 
 <hr>
 
-<h2>🧠 Estruturas Utilizadas</h2>
+<h2> Estruturas Utilizadas</h2>
 
 <table>
 
@@ -81,7 +81,7 @@ Além do gerenciamento, o sistema permite cadastro, atendimento, transferência 
 </table>
 <br>
 
-<h2>🛠 Tecnologias Utilizadas</h2>
+<h2> Tecnologias Utilizadas</h2>
 
 <ul>
 
@@ -98,7 +98,7 @@ Além do gerenciamento, o sistema permite cadastro, atendimento, transferência 
 <hr>
 <br>
 
-<h2>🚀 Novas Implementações V2</h2>
+<h2> Novas Implementações V2</h2>
 
 <ul>
 
@@ -126,7 +126,7 @@ Foi utilizado o <b>Cppcheck</b> para análise estática e verificação de poss�
 
 <hr>
 
-<h2>❌ Bugs Encontrados</h2>
+<h2> Bugs Encontrados</h2>
 
 <p>
 Durante a análise realizada pelo Cppcheck foram encontrados:
@@ -146,7 +146,7 @@ Algumas correções foram realizadas visando maior estabilidade do sistema.
 
 <hr>
 
-<h2>⏱ Análise de Tempo</h2>
+<h2> Análise de Tempo</h2>
 
 <p>
 Foi realizada uma análise de tempo de execução da aplicação.
@@ -190,7 +190,7 @@ Tempo Total = (clock_final - clock_inicial) / 1000
 
 <hr>
 
-<h2>🔥 Análise de Estresse</h2>
+<h2> Análise de Estresse</h2>
 
 <p>
 Foi realizada uma análise de estresse do sistema com objetivo de identificar limitações e possíveis falhas sob carga.
@@ -225,7 +225,7 @@ A estabilidade está diretamente ligada aos recursos disponíveis na máquina.
 
 <hr>
 
-<h2>📂 Estrutura do Projeto</h2>
+<h2> Estrutura do Projeto</h2>
 
 <pre>
 
@@ -234,7 +234,7 @@ Sistema-Hospital/
 
 </pre>
 <hr>
-<h2>📋 Relatório do Projeto</h2>
+<h2> Relatório do Projeto</h2>
 
 <p align="justify">
 Durante o desenvolvimento do projeto foram utilizadas tecnologias como 
@@ -246,7 +246,7 @@ código e gerenciamento dos dados do projeto.
 </p>
 
 <hr>
-<h2>🚫 Crítica do Projeto</h2>
+<h2> Crítica do Projeto</h2>
 
 <p align="justify">
 A principal dificuldade encontrada pelo grupo foi a adaptação à linguagem C, 
@@ -258,7 +258,7 @@ significativamente para o aprendizado lógico e técnico de toda a equipe.
 </p>
 <hr>
 
-<h2>👥 Integrantes do Grupo</h2>
+<h2> Integrantes do Grupo</h2>
 
 <p>
 Desenvolvido por: 
@@ -267,43 +267,42 @@ Desenvolvido por:
 <table width="100%">
 
 <tr>
-<td>👤 Beatriz Barboza Marques Lima da Silva</td>
+<td> Beatriz Barboza Marques Lima da Silva</td>
 </tr>
 
 <tr>
-<td>👤 Davy Queiroz da Silva</td>
+<td> Davy Queiroz da Silva</td>
 </tr>
 
 <tr>
 <td>
-<b>👤 Hudson Nascimento Pereira Vieira </b>
+<b> Hudson Nascimento Pereira Vieira </b>
 </td>
 </tr>
 
 <tr>
-<td>👤 Igor dos Santos Moura</td>
+<td> Igor dos Santos Moura</td>
 </tr>
 
 <tr>
-<td>👤 Matheus Lima Rocha</td>
+<td> Matheus Lima Rocha</td>
 </tr>
 
 <tr>
-<td>👤 Rafael dos Santos Paulo</td>
+<td> Rafael dos Santos Paulo</td>
 </tr>
 
 <tr>
-<td>👤 Rodrigo Gomes da Conceição</td>
+<td> Rodrigo Gomes da Conceição</td>
 </tr>
 
 </table>
 <hr>
-
-<h2>🔗 Repositório do Projeto</h2>
+<h2> Repositório do Projeto</h2>
 
 <p align="center">
 <a href="https://github.com/Hudson-Nasciment0/Sistema-de-Hospital">
-Clique aqui para acessar o Sistema de Hospital 🏥
+Clique aqui para acessar o Sistema de Hospital 
 </a>
 </p>
 <br>
