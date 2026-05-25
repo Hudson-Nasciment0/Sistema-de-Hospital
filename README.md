@@ -252,7 +252,7 @@ Desenvolvido por:
 
 <tr>
 <td>
-<b>👤 Hudson Nascimento Pereira Vieira ⭐</b>
+<b>👤 Hudson Nascimento Pereira Vieira </b>
 </td>
 </tr>
 
