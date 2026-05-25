@@ -67,8 +67,24 @@ Além do gerenciamento, o sistema permite cadastro, atendimento, transferência 
 </tr>
 
 </table>
+<br>
+
+<h2>🛠 Tecnologias Utilizadas</h2>
+
+<ul>
+
+<li>Linguagem C</li>
+
+<li>Alocação dinâmica (malloc/free)</li>
+
+<li>Cppcheck</li>
+
+<li>Estruturas de Dados</li>
+
+</ul>
 
 <hr>
+<br>
 
 <h2>🚀 Novas Implementações V2</h2>
 
@@ -214,23 +230,6 @@ Sistema-Hospital/
 
 </pre>
 
-<hr>
-
-<h2>🛠 Tecnologias Utilizadas</h2>
-
-<ul>
-
-<li>Linguagem C</li>
-
-<li>Alocação dinâmica (malloc/free)</li>
-
-<li>Cppcheck</li>
-
-<li>Estruturas de Dados</li>
-
-</ul>
-
-<hr>
 
 <hr>
 
