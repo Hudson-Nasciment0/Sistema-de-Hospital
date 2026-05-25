@@ -26,6 +26,18 @@ Além do gerenciamento, o sistema permite cadastro, atendimento, transferência 
 
 <hr>
 
+
+<h2>Como compilar:</h2>
+
+<p>No terminal, dentro da pasta execute o seguinte comando abaixo:</p>
+
+<p>gcc main.c packages/paciente.c -o hospital</p>
+
+<h2>Como executar:</h2>
+
+<p>Basta clicar duas vezes no executável "hospital.exe"</p>
+<hr>
+
 <h2>⚙ Funcionalidades</h2>
 
 ✔ Cadastro de pacientes<br>
@@ -218,15 +230,7 @@ A estabilidade está diretamente ligada aos recursos disponíveis na máquina.
 <pre>
 
 Sistema-Hospital/
-
-├── main.c
-├── paciente.c
-├── paciente.h
-├── fila.h
-├── pilha.h
-├── utils.h
-├── relatorios.h
-├── README.md
+<img src="image.png" alt="estrutura do projeto">
 
 </pre>
 <hr>
