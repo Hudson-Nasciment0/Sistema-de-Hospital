@@ -275,7 +275,4 @@ Desenvolvido por:
 
 <br>
 
-<p align="center">
-💻 <i>Desenvolvido para fins acadêmicos — Engenharia de Software</i>
-</p>
 
